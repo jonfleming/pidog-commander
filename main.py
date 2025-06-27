@@ -42,34 +42,36 @@ function process_command(text) {
 </head>
 <body>
 <h1>Picamera2 MJPEG Streaming Demo</h1>
-<button onclick=\"process_command('sit')\">Sit</button>
-<button onclick=\"process_command('stand')\">Stand</button>
 <button onclick=\"process_command('lie down')\">Lie Down</button>
-<button onclick=\"process_command('bark')\">Bark</button>
-<button onclick=\"process_command('howl')\">Howl</button>
+<button onclick=\"process_command('sit')\">Sit</button>
 <button onclick=\"process_command('shake')\">Shake</button>
 <button onclick=\"process_command('5')\">High Five</button>
-<button onclick=\"process_command('pant')\">Pant</button>
-<button onclick=\"process_command('sleep')\">Sleep</button><br/>
+<button onclick=\"process_command('lick')\">Lick Hand</button>
+<button onclick=\"process_command('stand')\">Stand</button>
+<button onclick=\"process_command('bark')\">Bark</button><br/>
 
+<button onclick=\"process_command('pant')\">Pant</button>
+<button onclick=\"process_command('howl')\">Howl</button>
+<button onclick=\"process_command('sleep')\">Sleep</button>
 <button onclick=\"process_command('twist')\">Twist</button>
 <button onclick=\"process_command('pushup')\">Push Up</button>
 <button onclick=\"process_command('surprise')\">Surprise</button>
-<button onclick=\"process_command('alert')\">Alert</button>
-<button onclick=\"process_command('wag tail')\">Wag Tail</button>
+<button onclick=\"process_command('wag tail')\">Wag Tail</button><br/>
+
+<button onclick=\"process_command('think')\">Think</button>
 <button onclick=\"process_command('no')\">Shake Head No</button>
 <button onclick=\"process_command('yes')\">Shake Head Yes</button>
-<button onclick=\"process_command('attack')\">Attack</button>
-<button onclick=\"process_command('lick')\">Lick Hand</button><br/>
-
 <button onclick=\"process_command('look left')\">Look Left</button>
 <button onclick=\"process_command('look right')\">Look Right</button>
 <button onclick=\"process_command('look down')\">Look Down</button>
-<button onclick=\"process_command('look up')\">Look Up</button>
+<button onclick=\"process_command('look up')\">Look Up</button><br/>
+
 <button onclick=\"process_command('forward')\">Forward</button>
 <button onclick=\"process_command('backward')\">Backward</button>
 <button onclick=\"process_command('turn left')\">Turn Left</button>
 <button onclick=\"process_command('turn right')\">Turn Right</button>
+<button onclick=\"process_command('alert')\">Alert</button>
+<button onclick=\"process_command('attack')\">Attack</button>
 <button onclick=\"process_command('reset')\">Reset</button>
 
 <style>

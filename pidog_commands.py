@@ -82,13 +82,13 @@ def execute(text):
        pitch = -25
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
     if ("forward" in text):
-        my_dog.do_action('forward', speed=80)
+        my_dog.do_action('forward', speed=98)
     if ("backward" in text):
-        my_dog.do_action('backward', speed=80)
+        my_dog.do_action('backward', speed=98)
     if ("turn left" in text):
-        my_dog.do_action('turn_left', speed=80)
+        my_dog.do_action('turn_left', speed=98)
     if ("turn right" in text):
-        my_dog.do_action('turn_right', speed=80)
+        my_dog.do_action('turn_right', speed=98)
     if ("reset" in text):
        yaw = 0
        roll = 0
