@@ -46,27 +46,38 @@ function process_command(text) {
 <button onclick=\"process_command('stand')\">Stand</button>
 <button onclick=\"process_command('lie down')\">Lie Down</button>
 <button onclick=\"process_command('bark')\">Bark</button>
-<button onclick=\"process_command('shake')\">Shake</button><br/>
-<button onclick=\"process_command('scratch')\">Scratch</button>
+<button onclick=\"process_command('howl')\">Howl</button>
 <button onclick=\"process_command('shake')\">Shake</button>
 <button onclick=\"process_command('5')\">High Five</button>
+<button onclick=\"process_command('scratch')\">Scratch</button>
 <button onclick=\"process_command('pant')\">Pant</button>
 <button onclick=\"process_command('sleep')\">Sleep</button>
-<button onclick=\"process_command('push up')\">Push Up</button>
-
+<button onclick=\"process_command('twist')\">Twist</button>
 <button onclick=\"process_command('stretch')\">Stretch</button>
+<button onclick=\"process_command('pushup')\">Push Up</button>
 <button onclick=\"process_command('surprise')\">Surprise</button>
 <button onclick=\"process_command('alert')\">Alert</button>
-<button onclick=\"process_command('wag_tail')\">Wag Tail</button>
-<button onclick=\"process_command('alert')\">Alert</button>
+<button onclick=\"process_command('wag_tail')\">Wag Tail</button><br/>
+
+<button onclick=\"process_command('no')\">Shake Head No</button>
+<button onclick=\"process_command('yes')\">Shake Head Yes</button>
+<button onclick=\"process_command('attack')\">Attack</button>
+<button onclick=\"process_command('lick')\">Lick Hand</button>
+<button onclick=\"process_command('think')\">Think</button>
+<button onclick=\"process_command('recall')\">Recall</button>
 <button onclick=\"process_command('look left')\">Look Left</button>
 <button onclick=\"process_command('look right')\">Look Right</button>
 <button onclick=\"process_command('look down')\">Look Down</button>
 <button onclick=\"process_command('look up')\">Look Up</button>
 <button onclick=\"process_command('head reset')\">Head Reset</button>
-<button onclick=\"process_command('no')\">Shake Head No</button>
-<button onclick=\"process_command('yes')\">Shake Head Yes</button>
-<button onclick=\"process_command('lick')\">Lick Hand</button>
+
+    button {
+        width: 120px; /* Adjust as needed */
+        height: 40px; /* Adjust as needed */
+        margin: 5px; /* Add some margin for spacing */
+    }
+</style>
+
 
 <img src="stream.mjpg" width="1280" height="720" />
 </body>

@@ -5,6 +5,10 @@ from transcribe_mic import transcribe_streaming, get_speech_adaptation
 # Import Pidog class
 from pidog import Pidog
 
+yaw = 0
+roll = 0
+pitch = -25
+
 # instantiate a Pidog with custom initialized servo angles
 my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
                 head_init_angles = [0, 0, -25],
@@ -16,54 +20,73 @@ def process_text(text):
     execute(text)
     
 def execute(text):
+    global yaw, roll, pitch
     if ("sit" in text):
         my_dog.do_action('sit', speed=80)
-    if ("scratch" in text):
-        scratch(my_dog)
-    if ("shake" in text):
-        hand_shake(my_dog)
-    if ("five" in text) or ("5" in text):
-        high_five(my_dog)
-    if ("pant" in text):
-        pant(my_dog)
-    if ("twist" in text):
-        body_twisting(my_dog)
+    if ("stand" in text):
+        sit_2_stand(my_dog)
+    if ("lay" in text) or ("lie" in text) or ("down" in text):
+        my_dog.do_action('lie', speed=70)
     if ("speak" in text):
         bark_action(my_dog)
         bark(my_dog)
     if ("bark" in text):
         bark_action(my_dog)
         bark(my_dog)
-    if ("no" in text):
-        shake_head_smooth(my_dog)
-    if ("up" in text):
-        push_up(my_dog)
     if ("howl" in text):
         howling(my_dog)
+    if ("shake" in text):
+        hand_shake(my_dog)
+    if ("five" in text) or ("5" in text):
+        high_five(my_dog)
+    if ("scratch" in text):
+        scratch(my_dog)
+    if ("pant" in text):
+        pant(my_dog)
+    if ("sleep" in text):
+        my_dog.do_action('doze_off', speed=95)
+    if ("twist" in text):
+        body_twisting(my_dog)
+    if ("pushup" in text) or ("push" in text) or ("push up" in text):
+        push_up(my_dog)
+    if ("surprise" in text):
+        surprise(my_dog)
+    if ("alert" in text):
+        alert(my_dog)
+    if ("wag_tail" in text):
+        my_dog.do_action('wag_tail', speed=95)
+
+    if ("no" in text):
+        shake_head_smooth(my_dog)
+    if ("yes" in text):
+        nod(my_dog)
     if ("attack" in text):
         attack_posture(my_dog)
     if ("lick" in text):
         lick_hand(my_dog)
-    if ("stand" in text):
-        sit_2_stand(my_dog)
-    if ("yes" in text):
-        nod(my_dog)
     if ("think" in text):
         think(my_dog)
     if ("recall" in text):
         recall(my_dog)
-    if ("alert" in text):
-        alert(my_dog)
-    if ("surprise" in text):
-        surprise(my_dog)
     if ("stretch" in text):
-        stretch(my_dog)        
-
-    if ("lay" in text) or ("lie" in text) or ("down" in text):
-        my_dog.do_action('lie', speed=70)
-    if ("wag_tail" in text):
-        my_dog.do_action('wag_tail', speed=95)
-
+        stretch(my_dog)       
+    if ("look left" in text):
+       yaw = -20
+       my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+    if ("look right" in text):
+       yaw = 20
+       my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+    if ("look up" in text):
+       pitch = 10
+       my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+    if ("look down" in text):
+       pitch = -25
+       my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+    if ("head reset" in text):
+       yaw = 0
+       roll = 0
+       pitch = -25
+       my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
 
 
 def main():
