@@ -32,8 +32,8 @@ PAGE = """\
 <head>
 <title>picamera2 MJPEG streaming demo</title>
 <script>
-function zoom() {
-    fetch('/zoom', {method: 'POST'})
+function process_command(text) {
+    fetch('/process_command', {method: 'POST', body: JSON.stringify({text: text})})
         .then(response => {
             if (!response.ok) alert('Zoom failed');
         });
@@ -42,33 +42,32 @@ function zoom() {
 </head>
 <body>
 <h1>Picamera2 MJPEG Streaming Demo</h1>
-<button onclick=\"process_text('sit')\">Sit</button><br/>
-<button onclick=\"process_text('scratch')\">Scratch</button><br/>
-<button onclick=\"process_text('shake')\">Shake</button><br/>
-<button onclick=\"process_text('5')\">High Five</button><br/>
-<button onclick=\"process_text('pant')\">Pant</button><br/>
-<button onclick=\"process_text('sleep')\">Sleep</button><br/>
-<button onclick=\"process_text('lie down')\">Lie Down</button><br/>
-<button onclick=\"process_text('push up')\">Push Up</button><br/>
-<button onclick=\"process_text('sit')\">Sit</button><br/>
-<button onclick=\"process_text('stand')\">Stand</button><br/>
-<button onclick=\"process_text('bark')\">Bark</button><br/>
-<button onclick=\"process_text('shake')\">Shake</button><br/>
-<button onclick=\"process_text('stretch')\">Stretch</button><br/>
-<button onclick=\"process_text('surprise')\">Surprise</button><br/>
-<button onclick=\"process_text('alert')\">Alert</button><br/><br/>
-<button onclick=\"process_text('wag_tail')\">Wag Tail</button><br/>
-<button onclick=\"process_text('sit')\">Alert</button><br/><br/>
+<button onclick=\"process_command('sit')\">Sit</button>
+<button onclick=\"process_command('scratch')\">Scratch</button>
+<button onclick=\"process_command('shake')\">Shake</button>
+<button onclick=\"process_command('5')\">High Five</button>
+<button onclick=\"process_command('pant')\">Pant</button>
+<button onclick=\"process_command('sleep')\">Sleep</button>
+<button onclick=\"process_command('lie down')\">Lie Down</button>
+<button onclick=\"process_command('push up')\">Push Up</button>
+<button onclick=\"process_command('sit')\">Sit</button>
+<button onclick=\"process_command('stand')\">Stand</button>
+<button onclick=\"process_command('bark')\">Bark</button>
+<button onclick=\"process_command('shake')\">Shake</button><br/>
 
-
-<button onclick=\"process_text('look left')\">Look Left</button><br/>
-<button onclick=\"process_text('look right')\">Look Right</button><br/>
-<button onclick=\"process_text('look down')\">Look Down</button><br/>
-<button onclick=\"process_text('look up')\">Look Up</button><br/>
-<button onclick=\"process_text('head reset')\">Head Reset</button><br/>
-<button onclick=\"process_text('no')\">Shake Head No</button><br/>
-<button onclick=\"process_text('yes')\">Shake Head Yes</button><br/>
-<button onclick=\"process_text('lick')\">Lick Hand</button><br/>
+<button onclick=\"process_command('stretch')\">Stretch</button>
+<button onclick=\"process_command('surprise')\">Surprise</button>
+<button onclick=\"process_command('alert')\">Alert</button>
+<button onclick=\"process_command('wag_tail')\">Wag Tail</button>
+<button onclick=\"process_command('alert')\">Alert</button>
+<button onclick=\"process_command('look left')\">Look Left</button>
+<button onclick=\"process_command('look right')\">Look Right</button>
+<button onclick=\"process_command('look down')\">Look Down</button>
+<button onclick=\"process_command('look up')\">Look Up</button>
+<button onclick=\"process_command('head reset')\">Head Reset</button>
+<button onclick=\"process_command('no')\">Shake Head No</button>
+<button onclick=\"process_command('yes')\">Shake Head Yes</button>
+<button onclick=\"process_command('lick')\">Lick Hand</button>
 
 <img src="stream.mjpg" width="1280" height="720" />
 </body>
@@ -128,8 +127,13 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
-        if self.path == '/zoom':
-            increment_zoom()
+        if self.path == '/process_command_json':
+            content_length = int(self.headers['Content-Length'])
+            post_data = self.rfile.read(content_length)
+            import json
+            data = json.loads(post_data)
+            text = data.get('text', '')
+            process_text(text)
             self.send_response(204)
             self.end_headers()
         else:
