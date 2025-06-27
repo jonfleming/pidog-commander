@@ -115,8 +115,8 @@ class StreamingServer(socketserver.ThreadingMixIn, server.HTTPServer):
     daemon_threads = True
 
 picam2 = Picamera2()
-scale_width = 3240
-scale_height = 2430
+scale_width = 1280
+scale_height = 960
 sensor_modes = picam2.sensor_modes
 
 def increment_zoom():
@@ -128,12 +128,11 @@ for mode in sensor_modes:
     
 native_size = sensor_modes[1]['size']  # Usually the largest available
 print(f"Native sensor size: {native_size}")
-selected_mode = sensor_modes[3] #
+selected_mode = sensor_modes[0] #
 sensor_width, sensor_height = selected_mode['size']
 
 # Configure video with a smaller output resolution to fit buffer
-output_resolution = (5184, 3888)  # Adjust as needed for your buffer
-#output_resolution = (640, 480)  # Adjust as needed for your buffer
+output_resolution = (640, 480)  # Adjust as needed for your buffer
 config = picam2.create_video_configuration(
     main={"size": output_resolution, "format": 'XRGB8888'},    
     raw=selected_mode
