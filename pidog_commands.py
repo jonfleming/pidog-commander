@@ -7,7 +7,7 @@ from pidog import Pidog
 
 yaw = 0
 roll = 0
-pitch = -25
+pitch = 0
 
 # instantiate a Pidog with custom initialized servo angles
 my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
@@ -25,7 +25,7 @@ def execute(text):
         my_dog.do_action('sit', speed=80)
     if ("stand" in text):
         sit_2_stand(my_dog)
-    if ("lay" in text) or ("lie" in text) or ("down" in text):
+    if ("lay" in text) or ("lie" in text):
         my_dog.do_action('lie', speed=70)
     if ("speak" in text):
         bark_action(my_dog)
@@ -68,13 +68,11 @@ def execute(text):
         think(my_dog)
     if ("recall" in text):
         recall(my_dog)
-    if ("stretch" in text):
-        stretch(my_dog)       
     if ("look left" in text):
-       yaw = -20
+       yaw = -15
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
     if ("look right" in text):
-       yaw = 20
+       yaw = 15
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
     if ("look up" in text):
        pitch = 10
@@ -85,7 +83,7 @@ def execute(text):
     if ("head reset" in text):
        yaw = 0
        roll = 0
-       pitch = -25
+       pitch = 0
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
 
 
