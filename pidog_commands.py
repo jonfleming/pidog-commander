@@ -59,11 +59,11 @@ def execute(text):
     if ("stretch" in text):
         stretch(my_dog)        
 
-    if ("lay" in text):
+    if ("lay" in text) or ("lie" in text) or ("down" in text):
         my_dog.do_action('lie', speed=70)
     if ("wag_tail" in text):
         my_dog.do_action('wag_tail', speed=95)
-        
+
 
 
 def main():

@@ -127,7 +127,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
 
     def do_POST(self):
-        if self.path == '/process_command_json':
+        if self.path == '/process_command':
             content_length = int(self.headers['Content-Length'])
             post_data = self.rfile.read(content_length)
             import json
