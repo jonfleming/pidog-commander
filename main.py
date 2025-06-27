@@ -43,17 +43,16 @@ function process_command(text) {
 <body>
 <h1>Picamera2 MJPEG Streaming Demo</h1>
 <button onclick=\"process_command('sit')\">Sit</button>
+<button onclick=\"process_command('stand')\">Stand</button>
+<button onclick=\"process_command('lie down')\">Lie Down</button>
+<button onclick=\"process_command('bark')\">Bark</button>
+<button onclick=\"process_command('shake')\">Shake</button><br/>
 <button onclick=\"process_command('scratch')\">Scratch</button>
 <button onclick=\"process_command('shake')\">Shake</button>
 <button onclick=\"process_command('5')\">High Five</button>
 <button onclick=\"process_command('pant')\">Pant</button>
 <button onclick=\"process_command('sleep')\">Sleep</button>
-<button onclick=\"process_command('lie down')\">Lie Down</button>
 <button onclick=\"process_command('push up')\">Push Up</button>
-<button onclick=\"process_command('sit')\">Sit</button>
-<button onclick=\"process_command('stand')\">Stand</button>
-<button onclick=\"process_command('bark')\">Bark</button>
-<button onclick=\"process_command('shake')\">Shake</button><br/>
 
 <button onclick=\"process_command('stretch')\">Stretch</button>
 <button onclick=\"process_command('surprise')\">Surprise</button>
