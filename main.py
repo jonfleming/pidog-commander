@@ -70,7 +70,7 @@ function process_command(text) {
 <button onclick=\"process_command('look down')\">Look Down</button>
 <button onclick=\"process_command('look up')\">Look Up</button>
 <button onclick=\"process_command('head reset')\">Head Reset</button>
-
+<style>
     button {
         width: 120px; /* Adjust as needed */
         height: 40px; /* Adjust as needed */
