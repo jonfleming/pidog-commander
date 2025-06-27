@@ -1,0 +1,4 @@
+ google-cloud-speech>=2.0.0
+ pyaudio
+ pyautogui
+ colorama

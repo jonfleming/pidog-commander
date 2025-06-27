@@ -1,0 +1,107 @@
+# Byte-compiled / optimized / DLL files  
+__pycache__/  
+*.py[cod]  
+*$py.class  
+
+# C extensions  
+*.so  
+
+# Distribution / packaging  
+.Python  
+build/  
+develop-eggs/  
+dist/  
+downloads/  
+eggs/  
+.eggs/  
+lib/  
+lib64/  
+parts/  
+sdist/  
+var/  
+*.egg-info/  
+.installed.cfg  
+*.egg  
+
+# PyInstaller  
+*.manifest  
+*.spec  
+
+# Installer logs  
+pip-log.txt  
+pip-delete-this-directory.txt  
+
+# Unit test / coverage reports  
+htmlcov/  
+.tox/  
+.nox/  
+.coverage  
+.coverage.*  
+.cache  
+nosetests.xml  
+coverage.xml  
+*.cover  
+*.py,cover  
+.hypothesis/  
+.pytest_cache/  
+
+# Translations  
+*.mo  
+*.pot  
+
+# Django stuff:  
+*.log  
+local_settings.py  
+db.sqlite3  
+db.sqlite3-journal  
+
+# Flask stuff:  
+instance/  
+.webassets-cache  
+
+# Scrapy stuff:  
+.scrapy  
+
+# Sphinx documentation  
+docs/_build/  
+
+# PyBuilder  
+target/  
+
+# IPython Notebook  
+.ipynb_checkpoints  
+
+# pyenv  
+.python-version  
+
+# pipenv  
+Pipfile.lock  
+
+# poetry  
+poetry.lock  
+
+# pyright  
+typings/  
+
+# mypy  
+.mypy_cache/  
+.dmypy.json  
+dmypy.json  
+
+# IDEs and editors  
+.vscode/  
+.idea/  
+*.sublime-project  
+*.sublime-workspace  
+
+# Environment variables and virtual environments  
+.env  
+.env.*  
+venv/  
+ENV/  
+env/  
+env.bak/  
+venv.bak/  
+
+# VS Code workspace storage  
+.vscode-test-results/ 
