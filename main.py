@@ -122,6 +122,7 @@ sensor_modes = picam2.sensor_modes
 def increment_zoom():
     pass
 
+
 for mode in sensor_modes:
     print("Mode", mode)
     
@@ -143,9 +144,15 @@ output = StreamingOutput()
 picam2.start_recording(JpegEncoder(), FileOutput(output))
 picam2.set_controls({"ScalerCrop": (0, 0, scale_width, scale_height )})
 
-try:
-    address = ('', 8000)
-    server = StreamingServer(address, StreamingHandler)
-    server.serve_forever()
-finally:
-    picam2.stop_recording()
+# --- Start both the camera server and the voice command thread ---
+if __name__ == '__main__':
+    # Start the voice command thread
+    voice_thread = Thread(target=run_voice_commands, daemon=True)
+    voice_thread.start()
+
+    try:
+        address = ('', 8000)
+        server = StreamingServer(address, StreamingHandler)
+        server.serve_forever()
+    finally:
+        picam2.stop_recording()
