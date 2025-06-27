@@ -58,7 +58,14 @@ def execute(text):
         surprise(my_dog)
     if ("stretch" in text):
         stretch(my_dog)        
-    
+
+    if ("lay" in text):
+        my_dog.do_action('lie', speed=70)
+    if ("wag_tail" in text):
+        my_dog.do_action('wag_tail', speed=95)
+        
+
+
 def main():
     adaptation = get_speech_adaptation('phrases.txt')
     transcribe_streaming(sr=44100, callback=process_text, speech_adaptation=adaptation)
