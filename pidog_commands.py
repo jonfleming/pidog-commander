@@ -1,3 +1,4 @@
+from time import sleep
 from pidog import Pidog
 from preset_actions import scratch, hand_shake, high_five, pant, body_twisting, bark_action, shake_head_smooth, bark, push_up, howling, attack_posture, lick_hand, feet_shake, sit_2_stand, nod, think, recall, alert, surprise,  stretch
 from transcribe_mic import transcribe_streaming, get_speech_adaptation
@@ -53,7 +54,7 @@ def execute(text):
         surprise(my_dog)
     if ("alert" in text):
         alert(my_dog)
-    if ("wag_tail" in text):
+    if ("wag tail" in text):
         my_dog.do_action('wag_tail', speed=95)
 
     if ("no" in text):
@@ -80,12 +81,21 @@ def execute(text):
     if ("look down" in text):
        pitch = -25
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
-    if ("head reset" in text):
+    if ("forward" in text):
+        my_dog.do_action('forward', speed=80)
+    if ("backward" in text):
+        my_dog.do_action('backward', speed=80)
+    if ("turn left" in text):
+        my_dog.do_action('turn_left', speed=80)
+    if ("turn right" in text):
+        my_dog.do_action('turn_right', speed=80)
+    if ("reset" in text):
        yaw = 0
        roll = 0
        pitch = 0
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
-
+       sleep(1)
+       my_dog.body_stop()
 
 def main():
     adaptation = get_speech_adaptation('phrases.txt')

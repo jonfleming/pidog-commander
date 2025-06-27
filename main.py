@@ -57,7 +57,7 @@ function process_command(text) {
 <button onclick=\"process_command('pushup')\">Push Up</button>
 <button onclick=\"process_command('surprise')\">Surprise</button>
 <button onclick=\"process_command('alert')\">Alert</button>
-<button onclick=\"process_command('wag_tail')\">Wag Tail</button>
+<button onclick=\"process_command('wag tail')\">Wag Tail</button>
 <button onclick=\"process_command('no')\">Shake Head No</button>
 <button onclick=\"process_command('yes')\">Shake Head Yes</button>
 <button onclick=\"process_command('attack')\">Attack</button>
@@ -69,7 +69,11 @@ function process_command(text) {
 <button onclick=\"process_command('look right')\">Look Right</button>
 <button onclick=\"process_command('look down')\">Look Down</button>
 <button onclick=\"process_command('look up')\">Look Up</button>
-<button onclick=\"process_command('head reset')\">Head Reset</button>
+<button onclick=\"process_command('forward')\">Forward</button>
+<button onclick=\"process_command('backward')\">Backward</button>
+<button onclick=\"process_command('turn left')\">Turn Left</button>
+<button onclick=\"process_command('turn right')\">Turn Right</button>
+<button onclick=\"process_command('reset')\">Reset</button>
 
 <style>
     button {
