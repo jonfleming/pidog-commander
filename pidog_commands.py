@@ -70,10 +70,10 @@ def execute(text):
     if ("recall" in text):
         recall(my_dog)
     if ("look left" in text):
-       yaw = -15
+       yaw = 15
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
     if ("look right" in text):
-       yaw = 15
+       yaw = -15
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
     if ("look up" in text):
        pitch = 10
