@@ -17,7 +17,8 @@ my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
             )
 
 def process_text(text):
-    print("heard:", str(text))
+    text = str(text).lower()
+    print("heard:", text)
     execute(text)
     
 def execute(text):
