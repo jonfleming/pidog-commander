@@ -18,7 +18,7 @@ from picamera2.outputs import FileOutput
 
 # Import mock PiDog voice command components
 from pidog_commands import process_text, my_dog
-from transcribe_mic_mock import get_speech_adaptation, transcribe_streaming
+from transcribe_mic import get_speech_adaptation, transcribe_streaming
 
 # Flag to control threads
 running = True
