@@ -23,7 +23,7 @@ def process_text(text):
     execute(text)
     
 def execute(text):
-    global yaw, roll, pitch
+    global yaw, roll, pitch, paws_out
     if ("sit" in text):
         my_dog.do_action('sit', speed=50)
     if ("stand" in text):
@@ -44,17 +44,21 @@ def execute(text):
     if ("howl" in text):
         howling(my_dog)
     if ("shake" in text):
+        my_dog.do_action('sit', speed=50)
         hand_shake(my_dog)
     if ("five" in text) or ("5" in text):
+        my_dog.do_action('sit', speed=50)
         high_five(my_dog)
     if ("scratch" in text):
+        my_dog.do_action('lie', speed=60)
         scratch(my_dog)
     if ("pant" in text):
         pant(my_dog)
     if ("sleep" in text):
-        my_dog.do_action('sit', speed=40)
+        my_dog.do_action('lie', speed=40)
         my_dog.do_action('doze_off', speed=95)
     if ("twist" in text):
+        my_dog.do_action('lie', speed=60)
         body_twisting(my_dog)
     if ("pushup" in text) or ("push" in text) or ("push up" in text):
         push_up(my_dog)
