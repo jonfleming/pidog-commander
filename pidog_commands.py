@@ -9,6 +9,7 @@ from pidog import Pidog
 yaw = 0
 roll = 0
 pitch = 0
+paws_out = False
 
 # instantiate a Pidog with custom initialized servo angles
 my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
@@ -24,11 +25,16 @@ def process_text(text):
 def execute(text):
     global yaw, roll, pitch
     if ("sit" in text):
-        my_dog.do_action('sit', speed=80)
+        my_dog.do_action('sit', speed=50)
     if ("stand" in text):
         sit_2_stand(my_dog)
     if ("lay" in text) or ("lie" in text):
-        my_dog.do_action('lie', speed=70)
+        if paws_out:
+            my_dog.do_action('lie', speed=60)
+            paws_out = False
+        else:
+            my_dog.do_action('lie_with_hands_out', speed=60)
+            paws_out = True
     if ("speak" in text):
         bark_action(my_dog)
         bark(my_dog)
@@ -46,6 +52,7 @@ def execute(text):
     if ("pant" in text):
         pant(my_dog)
     if ("sleep" in text):
+        my_dog.do_action('sit', speed=40)
         my_dog.do_action('doze_off', speed=95)
     if ("twist" in text):
         body_twisting(my_dog)

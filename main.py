@@ -36,6 +36,7 @@ PAGE = """\
 function process_command(text) {
     fetch('/process_command', {method: 'POST', body: JSON.stringify({text: text})})
         .then(response => {
+            console.log('response:', response);
             if (!response.ok) alert('Command failed');
         });
 }
@@ -154,7 +155,7 @@ function toggleSpeechRecognition() {
     }
 </style>
 
-<h3>Mock Camera Feed</h3>
+<h3>Camera Feed</h3>
 <img src="stream.mjpg" width="640" height="480" style="border: 2px solid #ccc; border-radius: 5px;" />
 
 <div name="status" id="satus" style="margin-top: 20px; padding: 10px; background-color: #f0f0f0; border-radius: 5px;">
