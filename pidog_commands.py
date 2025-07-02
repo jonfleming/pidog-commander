@@ -30,12 +30,13 @@ def execute(text):
         sit_2_stand(my_dog)
     if ("lay" in text) or ("lie" in text):
         if paws_out:
-            my_dog.do_action('lie', speed=60)
+            my_dog.do_action('lie', speed=50)
             paws_out = False
         else:
-            my_dog.do_action('lie_with_hands_out', speed=60)
+            my_dog.do_action('lie_with_hands_out', speed=50)
             paws_out = True
     if ("speak" in text):
+        sit_2_stand(my_dog)
         bark_action(my_dog)
         bark(my_dog)
     if ("bark" in text):
@@ -61,6 +62,7 @@ def execute(text):
         my_dog.do_action('lie', speed=60)
         body_twisting(my_dog)
     if ("pushup" in text) or ("push" in text) or ("push up" in text):
+        my_dog.do_action('lie', speed=50)
         push_up(my_dog)
     if ("surprise" in text):
         surprise(my_dog)
@@ -76,6 +78,7 @@ def execute(text):
     if ("attack" in text):
         attack_posture(my_dog)
     if ("lick" in text):
+        my_dog.do_action('sit', speed=50)
         lick_hand(my_dog)
     if ("think" in text):
         think(my_dog)
@@ -84,15 +87,19 @@ def execute(text):
     if ("look left" in text):
        yaw = 15
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+       print_head(yaw, roll, pitch)
     if ("look right" in text):
        yaw = -15
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+       print_head(yaw, roll, pitch)
     if ("look up" in text):
        pitch = 10
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+       print_head(yaw, roll, pitch)
     if ("look down" in text):
        pitch = -25
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+       print_head(yaw, roll, pitch)
     if ("forward" in text):
         my_dog.do_action('forward', speed=98)
     if ("backward" in text):
@@ -108,7 +115,9 @@ def execute(text):
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
        sleep(1)
        my_dog.body_stop()
-
+def print_head(yaw, roll, pitch):
+    print(f"Head angles - Yaw: {yaw}, Roll: {roll}, Pitch: {pitch}")
+    
 def main():
     adaptation = get_speech_adaptation('phrases.txt')
     transcribe_streaming(sr=44100, callback=process_text, speech_adaptation=adaptation)
