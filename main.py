@@ -11,14 +11,37 @@ from threading import Condition, Thread
 import threading
 import json
 
-# Now import the mocked modules
+
+# Add argparse for command line parameter
+import argparse
+
+# Parse command line arguments early
+parser = argparse.ArgumentParser(
+    description="PiDog Commander: By default, uses real hardware modules. Use --mock to run with mock hardware modules for local testing."
+)
+parser.add_argument(
+    '--mock',
+    action='store_true',
+    help='Use mock hardware modules for local testing (no Pi required).'
+)
+args, unknown = parser.parse_known_args()
+
+# Enable mocking before importing hardware-dependent modules, if --mock is set
+if args.mock:
+    from mock_hardware import patch_imports
+    patch_imports()
+
+# Now import the (possibly mocked) modules
 from picamera2 import Picamera2
 from picamera2.encoders import JpegEncoder
 from picamera2.outputs import FileOutput
 
-# Import mock PiDog voice command components
+# Import PiDog voice command components (mock or real)
 from pidog_commands import process_text, my_dog
-from transcribe_mic import get_speech_adaptation, transcribe_streaming
+if args.mock:
+    from transcribe_mic_mock import get_speech_adaptation, transcribe_streaming
+else:
+    from transcribe_mic import get_speech_adaptation, transcribe_streaming
 
 # Flag to control threads
 running = True

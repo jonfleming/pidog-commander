@@ -186,6 +186,13 @@ class MockPiDog:
         print(f"Mock PiDog completed action: {action_name}")
         return True
     
+    def read_distance(self):
+        """Mock distance reading"""
+        # Simulate a random distance between 10 and 100 cm
+        distance = random.randint(10, 100)
+        print(f"Mock PiDog read_distance: {distance} cm")
+        return distance
+    
     def legs_move(self, angles_list, immediately=False, speed=80):
         """Move legs to specified angles"""
         print(f"Mock PiDog legs_move: angles={len(angles_list)} positions, speed={speed}, immediately={immediately}")

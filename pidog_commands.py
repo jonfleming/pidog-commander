@@ -1,4 +1,5 @@
 from time import sleep
+import threading
 from pidog import Pidog
 from preset_actions import scratch, hand_shake, high_five, pant, body_twisting, bark_action, shake_head_smooth, bark, push_up, howling, attack_posture, lick_hand, feet_shake, sit_2_stand, nod, think, recall, alert, surprise,  stretch
 from transcribe_mic import transcribe_streaming, get_speech_adaptation
@@ -10,6 +11,9 @@ yaw = 0
 roll = 0
 pitch = 0
 paws_out = False
+sitting = False
+timer = None
+direction = "forward"  # Default walking direction
 
 # instantiate a Pidog with custom initialized servo angles
 my_dog = Pidog(leg_init_angles = [25, 25, -25, -25, 70, -45, -70, 45],
@@ -23,11 +27,13 @@ def process_text(text):
     execute(text)
     
 def execute(text):
-    global yaw, roll, pitch, paws_out
+    global yaw, roll, pitch, paws_out, sitting, timer, direction
     if ("sit" in text):
         my_dog.do_action('sit', speed=50)
+        sitting = True
     if ("stand" in text):
         sit_2_stand(my_dog)
+        sitting = False
     if ("lay" in text) or ("lie" in text):
         if paws_out:
             my_dog.do_action('lie', speed=50)
@@ -62,7 +68,10 @@ def execute(text):
         my_dog.do_action('lie', speed=60)
         body_twisting(my_dog)
     if ("pushup" in text) or ("push" in text) or ("push up" in text):
-        my_dog.do_action('lie', speed=50)
+        # check position before executing push-up
+        if sitting:
+            my_dog.do_action('lie', speed=50)
+            sitting = False
         push_up(my_dog)
     if ("surprise" in text):
         surprise(my_dog)
@@ -100,14 +109,22 @@ def execute(text):
        pitch = -25
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
        print_head(yaw, roll, pitch)
-    if ("forward" in text):
-        my_dog.do_action('forward', speed=98)
+
+    if("stop" in text):
+        stop_walking()
+        direction = "forward"  # Reset direction to default
+    if ("forward" in text):        
+        direction = "forward"
+        start_walking()        
     if ("backward" in text):
-        my_dog.do_action('backward', speed=98)
+        direction = "backward"
+        start_walking()
     if ("turn left" in text):
-        my_dog.do_action('turn_left', speed=98)
+        direction = "left"
+        start_walking()
     if ("turn right" in text):
-        my_dog.do_action('turn_right', speed=98)
+        direction = "right"
+        start_walking()
     if ("reset" in text):
        yaw = 0
        roll = 0
@@ -115,9 +132,44 @@ def execute(text):
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
        sleep(1)
        my_dog.body_stop()
+
+def move():
+    global direction
+
+    distance = my_dog.read_distance()
+    distance = round(distance,2)
+    print(f"Distance: {distance} cm")
+
+    # to do: check ultasonics to avoid obstacles
+    if direction == "forward":
+        my_dog.do_action('forward', speed=98)
+    elif direction == "backward":
+        my_dog.do_action('backward', speed=98)
+    elif direction == "left":
+        my_dog.do_action('turn_left', speed=98)
+    elif direction == "right":
+        my_dog.do_action('turn_right', speed=98)
+
+    start_walking()
+
+def start_walking():
+    global timer
+    if timer is None:
+        print("Starting to walk forward")
+        # Start a thread to keep walking until stopped
+        timer = threading.Timer(1, move).start()
+
+def stop_walking():
+    global timer
+    if timer is not None:
+        timer.cancel()
+        timer.join()  # Wait for the walking thread to finish
+        timer = None
+        print("Walking stopped")
+
 def print_head(yaw, roll, pitch):
     print(f"Head angles - Yaw: {yaw}, Roll: {roll}, Pitch: {pitch}")
-    
+
 def main():
     adaptation = get_speech_adaptation('phrases.txt')
     transcribe_streaming(sr=44100, callback=process_text, speech_adaptation=adaptation)
