@@ -154,7 +154,7 @@ function toggleSpeechRecognition() {
 <button onclick=\"process_command('turn right')\">Turn Right</button>
 <button onclick=\"process_command('alert')\">Alert</button>
 <button onclick=\"process_command('attack')\">Attack</button>
-<button onclick=\"process_command('reset')\">Reset</button>
+<button onclick=\"process_command('stop')\">Stop</button>
 
 <style>
     button {

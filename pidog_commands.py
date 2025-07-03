@@ -110,9 +110,6 @@ def execute(text):
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
        print_head(yaw, roll, pitch)
 
-    if("stop" in text):
-        stop_walking()
-        direction = "forward"  # Reset direction to default
     if ("forward" in text):        
         direction = "forward"
         start_walking()        
@@ -125,12 +122,13 @@ def execute(text):
     if ("turn right" in text):
         direction = "right"
         start_walking()
-    if ("reset" in text):
+    if ("stop" in text):
        yaw = 0
        roll = 0
        pitch = 0
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
        sleep(1)
+       stop_walking()
        my_dog.body_stop()
 
 def move():
