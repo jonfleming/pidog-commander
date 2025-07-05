@@ -123,10 +123,14 @@ def execute(text):
         direction = "right"
         start_walking()
     if ("stop" in text):
+       direction = None
+
+       # reset head position
        yaw = 0
        roll = 0
        pitch = 0
        my_dog.head_move([[yaw, roll, pitch]], pitch_comp=0, immediately=True, speed=80)
+       print("Stopping")
        sleep(1)
        stop_walking()
        my_dog.body_stop()
@@ -147,11 +151,18 @@ def move():
         my_dog.do_action('turn_left', speed=98)
     elif direction == "right":
         my_dog.do_action('turn_right', speed=98)
+    else:
+        print("Unknown direction:", direction)
+        stop_walking()
+        return
 
     start_walking()
 
 def start_walking():
-    global timer
+    global timer, direction
+
+    direction = None
+    
     if timer is None:
         print("Starting to walk forward")
         # Start a thread to keep walking until stopped
@@ -159,6 +170,7 @@ def start_walking():
 
 def stop_walking():
     global timer
+    print("Stopping walking:", timer)
     if timer is not None:
         timer.cancel()
         timer.join()  # Wait for the walking thread to finish
