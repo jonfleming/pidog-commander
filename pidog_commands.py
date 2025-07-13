@@ -140,7 +140,7 @@ def move():
 
     distance = my_dog.read_distance()
     distance = round(distance,2)
-    print(f"Distance: {distance} cm")
+    print(f"Direction: {direction}, Distance: {distance} cm")
 
     # to do: check ultasonics to avoid obstacles
     if direction == "forward":
@@ -164,7 +164,7 @@ def start_walking():
     direction = None
     
     if timer is None:
-        print("Starting to walk forward")
+        print("Starting to walk: ", direction)
         # Start a thread to keep walking until stopped
         timer = threading.Timer(1, move).start()
 
