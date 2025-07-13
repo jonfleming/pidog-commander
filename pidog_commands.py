@@ -160,9 +160,7 @@ def move():
 
 def start_walking():
     global timer, direction
-
-    direction = None
-    
+      
     if timer is None:
         print("Starting to walk: ", direction)
         # Start a thread to keep walking until stopped
